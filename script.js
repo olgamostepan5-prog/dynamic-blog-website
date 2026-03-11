@@ -15,3 +15,37 @@ div.innerHTML = `
 postsDiv.appendChild(div);
 
 });
+
+const form = document.getElementById("postForm");
+
+if(form){
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let title = document.getElementById("title").value;
+let content = document.getElementById("content").value;
+
+if(title === "" || content === ""){
+alert("Title and content required");
+return;
+}
+
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+let newPost = {
+id: Date.now(),
+title: title,
+content: content
+};
+
+posts.push(newPost);
+
+localStorage.setItem("posts", JSON.stringify(posts));
+
+window.location.href = "index.html";
+
+});
+
+}
