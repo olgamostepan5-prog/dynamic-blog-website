@@ -2,6 +2,8 @@ const postsDiv = document.getElementById("posts");
 
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
+if (postsDiv) {
+
 posts.forEach(post => {
 
 const div = document.createElement("div");
@@ -15,6 +17,8 @@ div.innerHTML = `
 postsDiv.appendChild(div);
 
 });
+
+}
 
 const form = document.getElementById("postForm");
 
@@ -32,8 +36,6 @@ alert("Title and content required");
 return;
 }
 
-let posts = JSON.parse(localStorage.getItem("posts")) || [];
-
 let newPost = {
 id: Date.now(),
 title: title,
@@ -47,5 +49,17 @@ localStorage.setItem("posts", JSON.stringify(posts));
 window.location.href = "index.html";
 
 });
+
+}
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+let post = posts.find(p => p.id == id);
+
+if(post){
+
+document.getElementById("title").innerText = post.title;
+document.getElementById("content").innerText = post.content;
 
 }
