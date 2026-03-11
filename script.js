@@ -63,3 +63,16 @@ document.getElementById("title").innerText = post.title;
 document.getElementById("content").innerText = post.content;
 
 }
+
+
+function deletePost(){
+
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+posts = posts.filter(p => p.id != id);
+
+localStorage.setItem("posts", JSON.stringify(posts));
+
+window.location.href = "index.html";
+
+}
